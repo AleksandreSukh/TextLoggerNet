@@ -33,7 +33,7 @@ namespace TextLoggerNet.Loggers
         }
 
         string _logFileName = "untitled_Log.txt";
-
+        //TODO:Add capability to get fileName with a func to auto generate for example daily or hourly logs
         //To set custom file name for the log othervise executing assembly name + log.txt is used
         public void SetFileName(string fileName)
         {
