@@ -12,6 +12,5 @@ namespace TextLoggerNet.Interfaces
         int ProcessId { get; }
         string SessionUserName { get; }
         string SessionUserNameFullNameAdaptedForFileName { get; }
-        DateTime ApllicationStartupTime { get; }
     }
 }

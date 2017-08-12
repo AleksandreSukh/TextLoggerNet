@@ -41,17 +41,14 @@
     <Compile Include="Helpers\IFileVersionInfoWrapper.cs" />
     <Compile Include="Helpers\LinqDelegates.cs" />
     <Compile Include="Helpers\ThreadHelper.cs" />
-    <Compile Include="Helpers\ThreadWrapper.cs" />
     <Compile Include="Helpers\WaitHandleHelpers.cs" />
     <Compile Include="Helpers\Win32ExtensionMethods.cs" />
     <Compile Include="Interfaces\IDebugModeStateMarker.cs" />
     <Compile Include="Interfaces\IExceptionLogger.cs" />
     <Compile Include="Interfaces\IExeLocationInfo.cs" />
     <Compile Include="Interfaces\IFileVersionInfoProvider.cs" />
-    <Compile Include="Interfaces\INativeMethodsWrapper.cs" />
     <Compile Include="Interfaces\ITextLogger.cs" />
     <Compile Include="Interfaces\ITextLoggerToFile.cs" />
-    <Compile Include="Interfaces\IThreadWrapper.cs" />
     <Compile Include="LinqBridge.cs" />
     <Compile Include="Loggers\ConsoleAndFileLogger.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
@@ -62,8 +59,6 @@
     <Compile Include="Loggers\LoggerTextFormatterVersionPidDateThread.cs" />
     <Compile Include="Loggers\TextLoggerExtensions.cs" />
     <Compile Include="Loggers\TextLoggerFileNameProvider.cs" />
-    <Compile Include="Loggers\TextLoggerFileNameProviderDefalt.cs" />
-    <Compile Include="Loggers\TextLoggerFileNameProviderEasy.cs" />
     <Compile Include="Loggers\TextLoggerToDefaultFile.cs" />
     <Compile Include="Loggers\TextLoggerToFile.cs" />
     <Compile Include="Loggers\TextLoggerToFileDefault.cs" />
