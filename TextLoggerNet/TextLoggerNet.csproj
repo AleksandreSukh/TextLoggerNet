@@ -43,7 +43,6 @@
     <Compile Include="Helpers\ThreadHelper.cs" />
     <Compile Include="Helpers\WaitHandleHelpers.cs" />
     <Compile Include="Helpers\Win32ExtensionMethods.cs" />
-    <Compile Include="Interfaces\IDebugModeStateMarker.cs" />
     <Compile Include="Interfaces\IExceptionLogger.cs" />
     <Compile Include="Interfaces\IExeLocationInfo.cs" />
     <Compile Include="Interfaces\IFileVersionInfoProvider.cs" />

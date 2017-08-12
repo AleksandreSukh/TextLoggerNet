@@ -6,10 +6,10 @@ namespace TextLoggerNet.Loggers
     public class ConsoleAndFileLogger : ConsoleLogger, ITextLoggerToFile
     {
         readonly ITextLoggerToFile _toFile;
-        public ConsoleAndFileLogger(IDebugModeStateMarker debugModeStateMarker,
+        public ConsoleAndFileLogger(
             IEnvironmentInfo environmentInfo,
             ITextLoggerToFile textLoggerToFile, ITextLoggerTextFormatter textLoggerTextFormatter)
-            : base(debugModeStateMarker, environmentInfo, textLoggerTextFormatter)
+            : base(textLoggerTextFormatter)
         {
             _toFile = textLoggerToFile;
         }

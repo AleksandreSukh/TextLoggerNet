@@ -28,19 +28,11 @@ namespace TextLoggerNet.Loggers
     public class ConsoleLogger : ITextLogger
     {
         //Dependencies
-        protected readonly IDebugModeStateMarker DebugModeStateMarker;
-        protected readonly IEnvironmentInfo EnvironmentInfo;
         protected readonly ITextLoggerTextFormatter TextLoggerTextFormatter;
         // ReSharper disable once InconsistentNaming
 
-        public ConsoleLogger(
-            IDebugModeStateMarker debugModeStateMarker,
-            IEnvironmentInfo environmentInfo,
-            ITextLoggerTextFormatter textLoggerTextFormatter)
+        public ConsoleLogger(ITextLoggerTextFormatter textLoggerTextFormatter)
         {
-            DebugModeStateMarker = debugModeStateMarker;
-            EnvironmentInfo = environmentInfo;
-            
             TextLoggerTextFormatter = textLoggerTextFormatter;
         }
 
@@ -53,7 +45,7 @@ namespace TextLoggerNet.Loggers
         { WriteLineWithoutFormatting(TextLoggerTextFormatter.FormatTextToLog(logText)); }
 
         protected void WriteLineWithoutFormatting(string text)
-        { if (DebugModeStateMarker.DebugModeIsOn) Console.WriteLine(text + Environment.NewLine); }
+        { Console.WriteLine(text + Environment.NewLine); }
 
         //Actual Logic
     }
