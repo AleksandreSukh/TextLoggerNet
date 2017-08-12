@@ -1,4 +1,4 @@
-﻿namespace TextLoggerNet.Loggers
+﻿namespace TextLoggerNet.Interfaces
 {
     public interface ITextLoggerTextFormatter
     {

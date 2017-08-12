@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+
 // ReSharper disable InconsistentNaming
 
-namespace TextLoggerNet.NativeTypes
+namespace TextLoggerNet.Helpers
 {
     public static class Win32
     {

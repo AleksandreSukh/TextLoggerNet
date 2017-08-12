@@ -39,8 +39,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\IFileVersionInfoWrapper.cs" />
-    <Compile Include="Helpers\LinqDelegates.cs" />
-    <Compile Include="Helpers\ThreadHelper.cs" />
     <Compile Include="Helpers\WaitHandleHelpers.cs" />
     <Compile Include="Helpers\Win32ExtensionMethods.cs" />
     <Compile Include="Interfaces\IExceptionLogger.cs" />
@@ -53,7 +51,7 @@
     <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="Loggers\ExceptionLoggerToTextLogger.cs" />
     <Compile Include="Interfaces\IEnvironmentInfo.cs" />
-    <Compile Include="Loggers\ITextLoggerTextFormatter.cs" />
+    <Compile Include="Interfaces\ITextLoggerTextFormatter.cs" />
     <Compile Include="Loggers\LoggerTextFormatterPidDateThread.cs" />
     <Compile Include="Loggers\LoggerTextFormatterVersionPidDateThread.cs" />
     <Compile Include="Loggers\TextLoggerExtensions.cs" />
@@ -62,7 +60,7 @@
     <Compile Include="Loggers\TextLoggerToFile.cs" />
     <Compile Include="Loggers\TextLoggerToFileDefault.cs" />
     <Compile Include="Loggers\TimeConsumingMethodLogger.cs" />
-    <Compile Include="NativeTypes\NativeTypes.cs" />
+    <Compile Include="Helpers\NativeTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
