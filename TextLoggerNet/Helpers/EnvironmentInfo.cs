@@ -23,21 +23,13 @@ namespace TextLoggerNet.Helpers
     public class EnvironmentInfo : IEnvironmentInfo
     {
         readonly IFileVersionInfoProvider _fileVersionInfoProvider;
-        readonly IEnvironmentWrapper _environmentWrapper;
-        readonly INativeMethodsWrapper _nativeMethodsWrapper;
 
-        public EnvironmentInfo(IFileVersionInfoProvider fileVersionInfoProvider,
-            IEnvironmentWrapper environmentWrapper,
-            INativeMethodsWrapper nativeMethodsWrapper)
+        public EnvironmentInfo(IFileVersionInfoProvider fileVersionInfoProvider)
         {
             _fileVersionInfoProvider = fileVersionInfoProvider;
-            _environmentWrapper = environmentWrapper;
-            _nativeMethodsWrapper = nativeMethodsWrapper;
         }
-        readonly WindowsIdentity _currentIdentity = WindowsIdentity.GetCurrent();
 
         #region EnvironmentInfo_Optimized
-        public string ApplicationVersion => FileVersionInfoCached != null ? FileVersionInfoCached.FileVersion : CurrentProssFileVersionInfo.FileVersion;
 
         public IFileVersionInfoWrapper CurrentProssFileVersionInfo => _fileVersionInfoProvider.FromVersionInfo(CurrentProcess.MainModule.FileVersionInfo);
 
@@ -45,7 +37,6 @@ namespace TextLoggerNet.Helpers
         public IFileVersionInfoWrapper FileVersionInfoCached => _fileVersionInfoStatic ?? (_fileVersionInfoStatic = CurrentProssFileVersionInfo);
         Process _currentProcess;
         public Process CurrentProcess => _currentProcess ?? (_currentProcess = Process.GetCurrentProcess());
-        public string ProcessName => CurrentProcess.ProcessName;
         int? _processId;
         public int ProcessId
         {
@@ -56,66 +47,15 @@ namespace TextLoggerNet.Helpers
             }
         }
 
-        int? _sessionId;
-        public int SessionId
-        {
-            get
-            {
-                if (_sessionId == null)
-                { _sessionId = CurrentProcess.SessionId; }
-                return _sessionId.Value;
-            }
-        }
         string _sessionUsername;
-        public string SessionUserName => _sessionUsername ?? (_sessionUsername = _nativeMethodsWrapper.GetUsernameBySessionId(CurrentProcess.SessionId, true) ?? string.Empty);
+        public string SessionUserName => _sessionUsername ?? (_sessionUsername = Win32ExtensionMethods.GetUsernameBySessionId(CurrentProcess.SessionId, true) ?? string.Empty);
 
         string _sessionUserNameForPath;
         public string SessionUserNameFullNameAdaptedForFileName => _sessionUserNameForPath ?? (_sessionUserNameForPath = SessionUserName.ToValidFileName());
-        bool? _userIsAdmin;
-        public bool UserIsAdmin
-        {
-            get
-            {
-                if (_userIsAdmin == null)
-                { _userIsAdmin = new WindowsPrincipal(_currentIdentity).IsInRole(WindowsBuiltInRole.Administrator); }
-                return _userIsAdmin.Value;
-            }
-        }
-
-
-        public bool UserIsSystem => _currentIdentity.IsSystem;
-        public bool UserIsLocal => _environmentWrapper.MachineName == _environmentWrapper.UserDomainName;
         public DateTime ApllicationStartupTime => CurrentProcess.StartTime;
-
-        public TimeSpan ApplicationUptime => DateTime.Now - ApllicationStartupTime;
-
-        public long GetCurrentProcessMemoryUsage()
-        {
-            using (var prc = Process.GetCurrentProcess()) return prc.PrivateMemorySize64;
-        }
-
-        public string[] GetInstalledDotNetVersions()
-        {
-            const string path = @"SOFTWARE\Microsoft\NET Framework Setup\NDP";
-            using (var installedVersions = Registry.LocalMachine.OpenSubKey(path))
-            {
-                var versionNames = installedVersions?.GetSubKeyNames();
-                return versionNames;
-            }
-        }
 
         #endregion
 
-
-        public bool IsConnectedToTheInternet()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// This Method returns true if computer is connected to local network
-        /// </summary>
-        public bool IsConnectedToTheLocalNetwork() => NetworkInterface.GetIsNetworkAvailable();
     }
 
 }

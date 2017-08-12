@@ -32,16 +32,15 @@ namespace TextLoggerNet.Loggers
         protected readonly IEnvironmentInfo EnvironmentInfo;
         protected readonly ITextLoggerTextFormatter TextLoggerTextFormatter;
         // ReSharper disable once InconsistentNaming
-        protected readonly IDateTime _dateTime;
 
         public ConsoleLogger(
             IDebugModeStateMarker debugModeStateMarker,
             IEnvironmentInfo environmentInfo,
-            IDateTime dateTime, ITextLoggerTextFormatter textLoggerTextFormatter)
+            ITextLoggerTextFormatter textLoggerTextFormatter)
         {
             DebugModeStateMarker = debugModeStateMarker;
             EnvironmentInfo = environmentInfo;
-            _dateTime = dateTime;
+            
             TextLoggerTextFormatter = textLoggerTextFormatter;
         }
 

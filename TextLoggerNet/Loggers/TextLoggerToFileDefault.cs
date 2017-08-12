@@ -9,16 +9,10 @@ namespace TextLoggerNet.Loggers
     public class TextLoggerToFileDefault : TextLoggerToFile
     {
         public TextLoggerToFileDefault(ITextLoggerTextFormatter textLoggerTextFormatter)
-            : base(new FileWrapper(), new ExeLocationInfo(), new DirectoryWrapper(), new EnvironmentInfo(new FileVersionInfoProvider(), new EnvironmentWrapper(), new NativeMethodsWrapper()), new EventWaitHandleWrapperProvider(), textLoggerTextFormatter, "applog") { }
+            : base(new ExeLocationInfo(), new EnvironmentInfo(new FileVersionInfoProvider()), new EventWaitHandleWrapperProvider(), textLoggerTextFormatter, "applog") { }
     }
 
-    public class NativeMethodsWrapper : INativeMethodsWrapper
-    {
-        public string GetUsernameBySessionId(int sessionId, bool prependDomain)
-        {
-            return Win32ExtensionMethods.GetUsernameBySessionId(sessionId, prependDomain);
-        }
-    }
+   
 
     /// <summary>
     /// Easy implementaion of <see cref="TextLoggerToFile"/> without dependencies

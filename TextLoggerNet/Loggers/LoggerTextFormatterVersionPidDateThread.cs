@@ -68,44 +68,14 @@ namespace TextLoggerNet.Loggers
                 $"{info.Major}.{info.Minor}.{info.Build}.{info.Revision}");
         }
     }
-    public class DateTimeWrapper : IDateTime
-    {
-        public System.DateTime Now => System.DateTime.Now;
-    }
-    public class EnvironmentWrapper : IEnvironmentWrapper
-    {
-        public int GetTickCount() => Environment.TickCount;
-
-        public string CurrentDirectory
-        {
-            get { return Environment.CurrentDirectory; }
-            set { Environment.CurrentDirectory = value; }
-        }
-
-        public string StackTrace => Environment.StackTrace;
-        public string MachineName => Environment.MachineName;
-        public string UserDomainName => Environment.UserDomainName;
-
-        public void Exit(int e) => Environment.Exit(e);
-
-        public string GetFolderPath(Environment.SpecialFolder folder) => Environment.GetFolderPath(folder);
-
-        public string SystemDirectory => Environment.SystemDirectory;
-
-        public string GetEnvironmentVariable(string variable) => Environment.GetEnvironmentVariable(variable);
-
-        public OperatingSystem OSVersion => Environment.OSVersion;
-    }
+   
 
     public class LoggerTextFormatterVersionPidDateThreadDefault : LoggerTextFormatterVersionPidDateThread
     {
         public LoggerTextFormatterVersionPidDateThreadDefault() 
             : base(new ThreadWrapper(), 
                   new EnvironmentInfo(
-                      new FileVersionInfoProvider(), 
-                      new EnvironmentWrapper(), 
-                      new NativeMethodsWrapper()), 
-                  new DateTimeWrapper())
+                      new FileVersionInfoProvider()))
         {
         }
     }
@@ -113,12 +83,12 @@ namespace TextLoggerNet.Loggers
     {
         readonly IThreadWrapper _threadWrapper;
         readonly IEnvironmentInfo _environmentInfo;
-        readonly IDateTime _dateTime;
-        public LoggerTextFormatterVersionPidDateThread(IThreadWrapper threadWrapper, IEnvironmentInfo environmentInfo, IDateTime dateTime)
+        
+        public LoggerTextFormatterVersionPidDateThread(IThreadWrapper threadWrapper, IEnvironmentInfo environmentInfo)
         {
             _threadWrapper = threadWrapper;
             _environmentInfo = environmentInfo;
-            _dateTime = dateTime;
+            
         }
 
         public string FormatTextToLog(string logText)
@@ -126,7 +96,7 @@ namespace TextLoggerNet.Loggers
             var threadname = _threadWrapper.CurrentThread.Name;
             if (!string.IsNullOrEmpty(threadname))
                 threadname += "\t";
-            var logTextWithoutVersion = $"{_environmentInfo.ProcessId}\t{_dateTime.Now.ToString("dd.MMM.yy hh:mm:ss.fff", CultureInfo.InvariantCulture)}\t{threadname}{logText}";
+            var logTextWithoutVersion = $"{_environmentInfo.ProcessId}\t{DateTime.Now.ToString("dd.MMM.yy hh:mm:ss.fff", CultureInfo.InvariantCulture)}\t{threadname}{logText}";
             if (_environmentInfo.FileVersionInfoCached == null)
                 return "NoVersion" + logTextWithoutVersion;
             var fileMajorPart = _environmentInfo.FileVersionInfoCached.FileMajorPart;

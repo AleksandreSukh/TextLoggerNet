@@ -8,9 +8,8 @@ namespace TextLoggerNet.Loggers
         readonly ITextLoggerToFile _toFile;
         public ConsoleAndFileLogger(IDebugModeStateMarker debugModeStateMarker,
             IEnvironmentInfo environmentInfo,
-            IDateTime dateTime,
             ITextLoggerToFile textLoggerToFile, ITextLoggerTextFormatter textLoggerTextFormatter)
-            : base(debugModeStateMarker, environmentInfo, dateTime, textLoggerTextFormatter)
+            : base(debugModeStateMarker, environmentInfo, textLoggerTextFormatter)
         {
             _toFile = textLoggerToFile;
         }

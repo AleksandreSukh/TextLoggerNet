@@ -9,20 +9,18 @@ namespace TextLoggerNet.Loggers
     public class TextLoggerToFile : ITextLoggerToFile
     {
         readonly ITextLoggerTextFormatter _textFormatter;
-        readonly IFileWrapper _fileWrapper;
+        
         readonly IExeLocationInfo _exeLocationInfo;
         readonly IEnvironmentInfo _environmentInfo;
-        readonly IDirectoryWrapper _directoryWrapper;
+        
         readonly IEventWaitHandleWrapperProvider _eventWaitHandleWrapperProvider;
         readonly string _applicationLogDirectoryName;
-        public TextLoggerToFile(IFileWrapper fileWrapper, IExeLocationInfo exeLocationInfo,
-            IDirectoryWrapper directoryWrapper, IEnvironmentInfo environmentInfo,
+        public TextLoggerToFile(IExeLocationInfo exeLocationInfo,
+            IEnvironmentInfo environmentInfo,
             IEventWaitHandleWrapperProvider eventWaitHandleWrapperProvider,
             ITextLoggerTextFormatter textLoggerTextFormatter, string applicationLogDirectoryName)
         {
-            _fileWrapper = fileWrapper;
             _exeLocationInfo = exeLocationInfo;
-            _directoryWrapper = directoryWrapper;
             _environmentInfo = environmentInfo;
             _eventWaitHandleWrapperProvider = eventWaitHandleWrapperProvider;
             _textFormatter = textLoggerTextFormatter;
@@ -58,10 +56,10 @@ namespace TextLoggerNet.Loggers
 
                 handleAcquired = waitHandle.WaitOne(10000, false);
                 var directoryName = Path.GetDirectoryName(logFilePath);
-                if (!_directoryWrapper.Exists(directoryName))
-                    _directoryWrapper.CreateDirectory(directoryName);
-                if (!_fileWrapper.Exists(logFilePath))
-                    _fileWrapper.Create(logFilePath).Close();
+                if (!System.IO.Directory.Exists(directoryName))
+                    System.IO.Directory.CreateDirectory(directoryName);
+                if (!System.IO.File.Exists(logFilePath))
+                    System.IO.File.Create(logFilePath).Close();
                 //if (Debugger.IsAttached)
                 //    Console.WriteLine(formatted);
                 using (var writer = new StreamWriter(logFilePath, true))
@@ -85,13 +83,13 @@ namespace TextLoggerNet.Loggers
         {
             try
             {
-                if (!_fileWrapper.Exists(logFilePath))
+                if (!System.IO.File.Exists(logFilePath))
                     return;
 
                 if (new FileInfo(logFilePath).Length <= 20000000) return;
-                try { _fileWrapper.Delete(logFilePath); }
+                try { System.IO.File.Delete(logFilePath); }
                 catch (Exception e)
-                { _fileWrapper.Move(logFilePath, logFilePath + ".DelErr"); }
+                { System.IO.File.Move(logFilePath, logFilePath + ".DelErr"); }
             }
             catch (Exception)
             {
