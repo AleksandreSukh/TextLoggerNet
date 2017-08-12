@@ -1,0 +1,5 @@
+G:\Source\Repos\doso.al-net\TextLoggerNet\obj\Debug\TextLoggerNet.csprojResolveAssemblyReference.cache
+G:\Source\Repos\doso.al-net\TextLoggerNet\bin\Debug\TextLoggerNet.dll
+G:\Source\Repos\doso.al-net\TextLoggerNet\bin\Debug\TextLoggerNet.pdb
+G:\Source\Repos\doso.al-net\TextLoggerNet\obj\Debug\TextLoggerNet.dll
+G:\Source\Repos\doso.al-net\TextLoggerNet\obj\Debug\TextLoggerNet.pdb
