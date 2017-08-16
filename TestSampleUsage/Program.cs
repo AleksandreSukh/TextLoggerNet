@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 using TextLoggerNet.Loggers;
 
 namespace TestSampleUsage
@@ -21,6 +22,15 @@ namespace TestSampleUsage
             
             //It accepts Exceptions too
             tl.WriteLine(new ArgumentException("In order to log exceptions directly to text file"));
+
+            //UnhandledExceptionLogger sample
+            //Subscribing at entry point of an application (or if application uses more than one Application domain like windows service then use this code at entry points of every app domain)
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, false);
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            //Subscribe to handle exceptions which are thrown from other threads
+            Application.ThreadException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, true);
+
+            //TODO:Add samples for all loggers
         }
     }
 }
