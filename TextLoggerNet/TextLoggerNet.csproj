@@ -62,6 +62,8 @@
     <Compile Include="Loggers\TimeConsumingMethodLogger.cs" />
     <Compile Include="Helpers\NativeTypes.cs" />
     <Compile Include="Loggers\UnhandledExceptionLogger.cs" />
+    <Compile Include="LoggingTools\IRunningMethodLogger.cs" />
+    <Compile Include="LoggingTools\RunningMethodLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
