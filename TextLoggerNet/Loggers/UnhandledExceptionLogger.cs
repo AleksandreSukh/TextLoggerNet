@@ -6,14 +6,26 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using Microsoft.Win32;
 using TextLoggerNet.Helpers;
 
 namespace TextLoggerNet.Loggers
 {
+    /// <summary>
+    /// This class provides a way to avoid application crash on unhandled exception and log it silently
+    /// </summary>
     public class UnhandledExceptionLogger
     {
-        public static void UnhandledExceptionHandler(object e, bool isThreadException, string meta = null, string useDirectrory = "applog")
+        /// <summary>
+        /// Event handler for AppDomain-s UnhandledException event and <see cref="Application.ThreadException"/>
+        /// </summary>
+        /// <param name="e">ExceptionEventArgs - this may be of type <see cref="UnhandledExceptionEventArgs"/> or <see cref="ThreadExceptionEventArgs"/></param>
+        /// <param name="isThreadException">In order to log exception info from <see cref="ThreadExceptionEventArgs"/> this parameter should be true when subscribed to <see cref="Application.ThreadException"/> </param>
+        /// <param name="exitCodeAfter">Exit code which will be returned after excepiont is logged and application exits</param>
+        /// <param name="meta">Extra information to append to exception log</param>
+        /// <param name="useDirectrory">Optional - custom folder name where exception log file will be created</param>
+        public static void UnhandledExceptionHandler(object e, bool isThreadException, int exitCodeAfter, string meta = null, string useDirectrory = "applog")
         {
 #if DEBUG
             throw (e as UnhandledExceptionEventArgs)?.ExceptionObject as Exception;
@@ -82,7 +94,7 @@ namespace TextLoggerNet.Loggers
             }
             finally
             {
-                Environment.Exit(0);
+                Environment.Exit(exitCodeAfter);
             }
         }
         static string[] GetInstalledDotNetVersions()

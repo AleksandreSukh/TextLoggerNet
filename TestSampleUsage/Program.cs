@@ -19,16 +19,16 @@ namespace TestSampleUsage
 
             //You can also use the same instance with same formatting etc. to log to some another file
             tl.WriteToFile("Text to log to custom file", Path.Combine(Directory.GetCurrentDirectory(), "logInTheSameDir.txt"));
-            
+
             //It accepts Exceptions too
             tl.WriteLine(new ArgumentException("In order to log exceptions directly to text file"));
 
             //UnhandledExceptionLogger sample
             //Subscribing at entry point of an application (or if application uses more than one Application domain like windows service then use this code at entry points of every app domain)
-            AppDomain.CurrentDomain.UnhandledException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, false);
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, false, exitCodeAfter: 404);
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //Subscribe to handle exceptions which are thrown from other threads
-            Application.ThreadException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, true);
+            Application.ThreadException += (sender, e) => UnhandledExceptionLogger.UnhandledExceptionHandler(e, true, exitCodeAfter: 405);
 
             //TODO:Add samples for all loggers
         }
