@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace TextLoggerNet.Helpers
 {
-    public static class Win32ExtensionMethods
+    internal static class Win32ExtensionMethods
     {
         public static string GetUsernameBySessionId(int sessionId, bool prependDomain)
         {

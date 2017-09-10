@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace TextLoggerNet.Helpers
 {
-    public static class Win32
+    internal static class Win32
     {
         [DllImport("Wtsapi32.dll")]
         public static extern bool WTSQuerySessionInformation(

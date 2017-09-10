@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.LoggingTools
 {
     public class RunningMethodLogger : IDisposable, IRunningMethodLogger
     {
-        private readonly ITextLogger _textLogger;
+        private readonly ILogger _logger;
         private readonly System.Timers.Timer _timer;
         string _currentActivityName = "start";
         int _internalCounter;
 
-        public RunningMethodLogger(ITextLogger textLogger, TimeSpan updateInterval)
+        public RunningMethodLogger(ILogger logger, TimeSpan updateInterval)
         {
-            _textLogger = textLogger;
+            _logger = logger;
             _timer = new System.Timers.Timer(updateInterval.TotalMilliseconds);
             _timer.Elapsed +=
-                (s, e) => { textLogger.WriteLine($"\t\t\t{TimeSpan.FromSeconds(++_internalCounter * updateInterval.TotalSeconds).ToVerboseStingHMS()} Since {_currentActivityName}"); };
+                (s, e) => { logger.WriteLine($"\t\t\t{TimeSpan.FromSeconds(++_internalCounter * updateInterval.TotalSeconds).ToVerboseStingHMS()} Since {_currentActivityName}"); };
         }
 
         public void ResetAction(string newName)
         {
             _currentActivityName = newName;
-            _textLogger.WriteLine("===> " + _currentActivityName);
+            _logger.WriteLine("===> " + _currentActivityName);
             _internalCounter = 0;
         }
 

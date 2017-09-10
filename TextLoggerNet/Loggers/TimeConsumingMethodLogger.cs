@@ -7,11 +7,11 @@ namespace TextLoggerNet.Loggers
 {
     public static class TimeConsumingMethodLogger //: ITimeConsumingMethodLogger
     {
-        static ITextLogger _;
+        static ILogger _;
         [Conditional("TIMEMON")]
-        public static void Initialize(ITextLogger textLogger)
+        public static void Initialize(ILogger logger)
         {
-            _ = textLogger;
+            _ = logger;
         }
 
         static readonly object _logTimeLocker = new object();
@@ -38,7 +38,7 @@ namespace TextLoggerNet.Loggers
                     {
                         var td = now - LogTime[curThreadId];
                         var milliseconds = td.TotalMilliseconds;
-                        var seconds = (int)td.TotalSeconds;//mtelze dakastva
+                        var seconds = (int)td.TotalSeconds;
                         var ext = "";
                         for (int i = 0; i < seconds; i++)
                         {

@@ -1,6 +1,6 @@
 ﻿namespace TextLoggerNet.Interfaces
 {
-    public interface ITextLoggerToFile : ITextLogger
+    public interface ILoggerToFile : ILogger
     {
         //void SetFileName(string fileName);
     }

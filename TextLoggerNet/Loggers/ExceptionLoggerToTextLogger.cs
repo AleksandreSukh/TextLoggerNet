@@ -5,16 +5,16 @@ namespace TextLoggerNet.Loggers
 {
     public class ExceptionLoggerToTextLogger : IExceptionLogger
     {
-        readonly ITextLogger _textLogger;
+        readonly ILogger _logger;
 
-        public ExceptionLoggerToTextLogger(ITextLogger textLogger)
+        public ExceptionLoggerToTextLogger(ILogger logger)
         {
-            _textLogger = textLogger;
+            _logger = logger;
         }
 
         public void LogException(Exception exception)
         {
-            _textLogger.WriteLine(exception);
+            _logger.WriteLine(exception);
         }
     }
 }

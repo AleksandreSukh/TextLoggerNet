@@ -11,7 +11,7 @@ namespace TestSampleUsage
         {
             //Default behavior of this logger is to create subdirectory (relative to exe location) and log to file with name forrmatted with userName text formatted with application version - ProcessId - ThreadName (if any) and current date
 
-            var tl = new TextLoggerToFileDefaultEasy();
+            var tl = new LoggerToFileDefaultEasy();
             tl.WriteLine("DefaultLog");
 
             //This method gives ability to change log file name 

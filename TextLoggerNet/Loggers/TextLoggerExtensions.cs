@@ -9,25 +9,25 @@ namespace TextLoggerNet.Loggers
     /// </summary>
     public static class TextLoggerExtensions
     {
-        static ITextLogger _textLogger;
-        public static void Init(ITextLogger textLogger) { _textLogger = textLogger; }
+        static ILogger _logger;
+        public static void Init(ILogger logger) { _logger = logger; }
 
         public static void w2t(this string logText)
         {
 #if DEBUGALL
-            if (_textLogger == null)
+            if (_logger == null)
                 throw new InvalidOperationException("Textlogger must be initialized first");
 #endif
-            _textLogger?.WriteLine(logText);
+            _logger?.WriteLine(logText);
         }
 
         public static void w2t(this Exception ex)
         {
 #if DEBUGALL
-            if (_textLogger == null)
+            if (_logger == null)
                 throw new InvalidOperationException("Textlogger must be initialized first");
 #endif
-            _textLogger?.WriteLine(ex);
+            _logger?.WriteLine(ex);
         }
     }
 }

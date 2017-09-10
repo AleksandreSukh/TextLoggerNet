@@ -3,15 +3,13 @@ using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.Loggers
 {
-    public class ConsoleAndFileLogger : ConsoleLogger, ITextLoggerToFile
+    public class ConsoleAndFileLogger : ConsoleLogger, ILoggerToFile
     {
-        readonly ITextLoggerToFile _toFile;
-        public ConsoleAndFileLogger(
-            IEnvironmentInfo environmentInfo,
-            ITextLoggerToFile textLoggerToFile, ITextLoggerTextFormatter textLoggerTextFormatter)
+        readonly ILoggerToFile _toFile;
+        public ConsoleAndFileLogger(ILoggerToFile loggerToFile, ITextLoggerTextFormatter textLoggerTextFormatter)
             : base(textLoggerTextFormatter)
         {
-            _toFile = textLoggerToFile;
+            _toFile = loggerToFile;
         }
 
 

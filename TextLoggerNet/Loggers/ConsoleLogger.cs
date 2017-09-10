@@ -3,7 +3,7 @@ using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.Loggers
 {
-    public class FakeLogger : ITextLogger
+    public class FakeLogger : ILogger
     {
         public void WriteLine(string logText)
         {
@@ -13,7 +13,7 @@ namespace TextLoggerNet.Loggers
         {
         }
     }
-    public class ConsoleLoggerEasy : ITextLogger
+    public class ConsoleLoggerEasy : ILogger
     {
         public void WriteLine(string logText)
         {
@@ -25,7 +25,7 @@ namespace TextLoggerNet.Loggers
             Console.WriteLine(exception);
         }
     }
-    public class ConsoleLogger : ITextLogger
+    public class ConsoleLogger : ILogger
     {
         //Dependencies
         protected readonly ITextLoggerTextFormatter TextLoggerTextFormatter;

@@ -1,11 +1,12 @@
 using System;
 using System.Globalization;
 using System.Threading;
+using TextLoggerNet.Helpers;
 using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.Loggers
 {
-    public class LoggerTextFormatterPidDateThread : ITextLoggerTextFormatter
+    internal class LoggerTextFormatterPidDateThread : ITextLoggerTextFormatter
     {
         readonly IEnvironmentInfo _environmentInfo;
         

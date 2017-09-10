@@ -6,7 +6,7 @@ using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.Loggers
 {
-    public class TextLoggerToFile : ITextLoggerToFile
+    public class LoggerToFile : ILoggerToFile
     {
         readonly ITextLoggerTextFormatter _textFormatter;
         
@@ -15,7 +15,7 @@ namespace TextLoggerNet.Loggers
         
         readonly IEventWaitHandleWrapperProvider _eventWaitHandleWrapperProvider;
         readonly string _applicationLogDirectoryName;
-        public TextLoggerToFile(IExeLocationInfo exeLocationInfo,
+        public LoggerToFile(IExeLocationInfo exeLocationInfo,
             IEnvironmentInfo environmentInfo,
             IEventWaitHandleWrapperProvider eventWaitHandleWrapperProvider,
             ITextLoggerTextFormatter textLoggerTextFormatter, string applicationLogDirectoryName)
