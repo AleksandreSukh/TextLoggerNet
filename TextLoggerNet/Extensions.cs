@@ -17,7 +17,7 @@ namespace TextLoggerNet
     }
     public static class TimeSpanVerbose
     {
-        public static string ToVerboseStingHMS(this TimeSpan timeSpan)
+        public static string ToVerboseStringHMS(this TimeSpan timeSpan)
         {
             var timeParts = new Dictionary<TimePartEnum, uint>();
             timeParts.Add(TimePartEnum.Days, (uint)timeSpan.Days);

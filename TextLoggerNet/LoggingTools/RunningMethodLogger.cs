@@ -15,7 +15,7 @@ namespace TextLoggerNet.LoggingTools
             _logger = logger;
             _timer = new System.Timers.Timer(updateInterval.TotalMilliseconds);
             _timer.Elapsed +=
-                (s, e) => { logger.WriteLine($"\t\t\t{TimeSpan.FromSeconds(++_internalCounter * updateInterval.TotalSeconds).ToVerboseStingHMS()} Since {_currentActivityName}"); };
+                (s, e) => { logger.WriteLine($"\t\t\t{TimeSpan.FromSeconds(++_internalCounter * updateInterval.TotalSeconds).ToVerboseStringHMS()} Since {_currentActivityName}"); };
         }
 
         public void ResetAction(string newName)

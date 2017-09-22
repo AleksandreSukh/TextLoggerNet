@@ -6,7 +6,7 @@ using TextLoggerNet.Interfaces;
 
 namespace TextLoggerNet.Loggers
 {
-    internal class LoggerTextFormatterPidDateThread : ITextLoggerTextFormatter
+    public class LoggerTextFormatterPidDateThread : ITextLoggerTextFormatter
     {
         readonly IEnvironmentInfo _environmentInfo;
         
